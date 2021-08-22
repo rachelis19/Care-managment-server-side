@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory} from '@nestjs/mongoose'
-import { PkgType } from 'src/core/constns/enums'
+import { PkgType } from 'src/core/config/enums'
 import { Document } from 'mongoose'
 import { v4 as uuid } from 'uuid'
 

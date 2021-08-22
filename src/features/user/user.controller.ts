@@ -2,7 +2,7 @@ import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common'
 import { UserService } from './user.service';
 import { UserDto } from './user.dto'
 import { User } from './user.schema';
-import { UserType } from 'src/core/constns/enums';
+import { UserType } from 'src/core/config/enums';
 
 @Controller('api/user')
 export class UserController{

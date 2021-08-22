@@ -3,7 +3,7 @@ import { Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserDto } from './user.dto'
 import { Model } from 'mongoose'
-import { UserType } from 'src/core/constns/enums'
+import { UserType } from 'src/core/config/enums'
 
 
 @Injectable()
@@ -20,8 +20,8 @@ export class UserService{
       return await createdUser.save()
     }
 
-    public async find(userEmail: string, type: UserType): Promise<User> {
-      this.logger.log(`Received find ${type} request with ${userEmail} email`)
+    public async find(userEmail: string, type?: UserType): Promise<User> {
+      this.logger.log(`Received find ${type?? ''} request with ${userEmail} email`)
 
       return await this.userModel.findOne({email: userEmail, userType: type})
     }
