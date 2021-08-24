@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { Distribution } from '../distribution/distribution.schema'
-import { AddressService } from '../address/address.service'
+import { LocationIqService } from '../locationIq/locationIq.service'
 import { UserService } from '../user/user.service'
 import  { haversine } from 'haversine'
-import { AddressDto } from '../address/address.dto'
+import { LocationIqDto } from '../locationIq/locationIq.dto'
 import { UserType } from 'src/core/config/enums'
 
 const kmeans = require('node-kmeans')
@@ -13,10 +13,10 @@ export class DivisonService{
 
     logger = new Logger(DivisonService.name)
 
-    constructor(private addressService: AddressService,
+    constructor(private addressService: LocationIqService,
                 private userService: UserService){}
-
-    public async createKClusters(distributions: Distribution[]){
+ 
+    public async packages(distributions: Distribution[]){
         this.logger.log('Recivied request to create clusters for distributions')
 
         const numOfVolunteers = await this.userService.numOfUsers(UserType.Volunteer)
@@ -29,7 +29,14 @@ export class DivisonService{
 
         const landmarkVec = await this.convertAddressToLandmark(addresses)
      
-        const response = kmeans.clusterize(landmarkVec, {k}, (err,res) => {
+        const clusters = await this.createKClusters(k, landmarkVec)
+        
+        return clusters
+
+    }
+
+    protected async createKClusters(k: number, locations: number[][]){
+        const response = kmeans.clusterize(locations, {k}, (err,res) => {
             if (err) console.error(err)
             return res
           })
@@ -37,7 +44,7 @@ export class DivisonService{
         return response
     }
 
-    protected async convertAddressToLandmark(addresses: AddressDto[]){
+    protected async convertAddressToLandmark(addresses: LocationIqDto[]){
         const promises = await addresses.map(address=> {
             return this.addressService.getDetails(address)
         })
@@ -48,7 +55,7 @@ export class DivisonService{
     }
 
 
-    protected async findClosestVolunteer(inputAddress: AddressDto){     
+    protected async findClosestVolunteer(inputAddress: LocationIqDto){     
        const volunteers = await this.userService.findAll({userType: UserType.Volunteer})
              
        const addresses = volunteers.map(volunteer => volunteer.address) 

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ChatGateway } from './chat.gateway'
-import { AddressModule } from './features/address/address.module'
+import { LocationIqModule } from './features/locationIq/locationIq.module'
 import { DistributionModule } from './features/distribution/distribution.module'
 import { DivisonModule } from './features/division/divison.module'
 import { RecipientModule } from './features/recipient/recipient.module'
@@ -14,7 +14,7 @@ const mongooseConnection = 'mongodb+srv://racheliShen:0545581921@cluster0.4jla2.
             DistributionModule,
             RecipientModule,
             DivisonModule,  
-            AddressModule,
+            LocationIqModule,
             UserModule],
             
   providers: [ChatGateway]

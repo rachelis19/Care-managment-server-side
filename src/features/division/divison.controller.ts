@@ -9,6 +9,6 @@ export class DivisonController{
 
     @Post()
     public async create(@Body() distributons: Distribution[]){
-       return this.divisonService.createKClusters(distributons)
+       return this.divisonService.packages(distributons)
     }
 }
