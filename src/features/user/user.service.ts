@@ -20,8 +20,8 @@ export class UserService{
       return await createdUser.save()
     }
 
-    public async find(userEmail: string, type?: UserType): Promise<User> {
-      this.logger.log(`Received find ${type?? ''} request with ${userEmail} email`)
+    public async find(userEmail: string, type: UserType): Promise<User> {
+      this.logger.log(`Received find ${type} request with ${userEmail} email`)
 
       return await this.userModel.findOne({email: userEmail, userType: type})
     }
@@ -30,6 +30,10 @@ export class UserService{
         this.logger.log('Received find all users request')
 
         return await this.userModel.find(options)
+    }
+
+    public async numOfUsers(type :UserType){
+      return (await this.findAll({userType: type})).length
     }
 
     // public async update(){

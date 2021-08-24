@@ -24,6 +24,6 @@ export class DistributionController{
 
     @Put()
     public async update(@Body() distribution){
-        return await this.update(distribution)
+        return await this.distributionService.update(distribution)
     }
 }

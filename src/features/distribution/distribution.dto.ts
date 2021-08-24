@@ -3,6 +3,7 @@ import { PkgType } from "src/core/config/enums"
 
 export class DistributionDto{
 
+    //default false
     isDelivered: boolean
 
     @IsNotEmpty()

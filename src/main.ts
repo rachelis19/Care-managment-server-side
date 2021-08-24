@@ -24,7 +24,7 @@ async function bootstrap() {
   
   await app.listen(3000)
 
-  logger.log('app context is ready')
+  logger.log('App context is ready')
 
 }
 

@@ -16,11 +16,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
     
     this.logger.error(`Exception has been occur with ${status}`)
 
-    const extractRespones = ExtractException.fromException(exception)
-    //console.log(extractRespones);
-
-    return response
-    .status(status)
-    .json(extractRespones.json())
+    response
+      .status(status)
+      .json({
+        statusCode: status,
+        error: exception.getResponse(),
+        path: request.url,
+        stack: exception.stack
+      })
   }
 }
