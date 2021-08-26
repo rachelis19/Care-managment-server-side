@@ -3,6 +3,8 @@ import { AppModule } from './app.module'
 import { Logger, ValidationError, ValidationPipe } from '@nestjs/common'
 import { HttpExceptionFilter } from './core/httpFilters/http-exception.filter'
 import { ValidationException } from './core/exceptions/validation-exception'
+import { JwtAuthGuard } from './features/auth/guards/jwt.guard'
+import { AuthGuard } from '@nestjs/passport'
 
 async function bootstrap() {
 
@@ -24,7 +26,7 @@ async function bootstrap() {
   
   await app.listen(3000)
 
-  logger.log('app context is ready')
+  logger.log('App context is ready')
 
 }
 

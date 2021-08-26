@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Inject, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '../auth/guards/jwt.guard'
 import { DistributionDto } from './distribution.dto'
 import { Distribution } from './distribution.schema'
 import { DistributionService } from './distribution.service'
 
+@UseGuards(JwtAuthGuard)
 @Controller('api/distribution')
 export class DistributionController{
     constructor(private distributionService: DistributionService){}
@@ -11,7 +13,7 @@ export class DistributionController{
     public async create(@Body() distribution: DistributionDto): Promise<Distribution>{   
         return await this.distributionService.create(distribution)
     }
-
+    
     @Get()
     public async findAll(): Promise<Distribution[]>{
         return await this.distributionService.findAll()
@@ -22,8 +24,8 @@ export class DistributionController{
         return await this.distributionService.find(id)
     }
 
-    @Put()
-    public async update(@Body() distribution){
-        return await this.update(distribution)
+    @Put('id/:id')
+    public async update(@Param('id') id: string, @Body() distribution){
+        return await this.distributionService.update(id, distribution)
     }
 }

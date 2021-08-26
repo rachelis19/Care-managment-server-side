@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsEnum } from 'class-validator';
-import { UserType } from '../../core/constns/enums';
+import { UserType } from '../../core/config/enums';
 
 export class UserDto {
     

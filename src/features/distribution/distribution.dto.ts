@@ -1,8 +1,9 @@
 import { IsEnum, IsNotEmpty } from "class-validator"
-import { PkgType } from "src/core/constns/enums"
+import { PkgType } from "src/core/config/enums"
 
 export class DistributionDto{
 
+    //default false
     isDelivered: boolean
 
     @IsNotEmpty()

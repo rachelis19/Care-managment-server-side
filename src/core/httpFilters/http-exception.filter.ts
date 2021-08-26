@@ -14,13 +14,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
     
-    this.logger.error(`Exception has been occur with ${status}`)
+    this.logger.error(`Exception has been occur with ${status} code`)
 
-    const extractRespones = ExtractException.fromException(exception)
-    //console.log(extractRespones);
-
-    return response
-    .status(status)
-    .json(extractRespones.json())
+    response
+      .status(status)
+      .json({
+        statusCode: status,
+        error: exception.getResponse(),
+        path: request.url
+      })
   }
 }
