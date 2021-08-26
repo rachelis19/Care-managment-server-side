@@ -5,8 +5,9 @@ import { UserService } from '../user/user.service'
 import { LocationIqDto } from '../locationIq/locationIq.dto'
 import { UserType } from '../../core/config/enums'
 import { zip } from '../../core/utilities/zip'
-import haversine from '../../core/utilities/haversine'
+//import haversine from '../../core/utilities/haversine'
 const kmeans = require('node-kmeans')
+const haversine = require('haversine')
 
 @Injectable()
 export class DivisonService{
@@ -77,17 +78,22 @@ export class DivisonService{
        const addresses = volunteers.map(volunteer => volunteer.address) 
 
        const convertedToLandmark = await this.convertAddressToLandmark(addresses)
+
+       const inputLandmark: any = await this.locationIqService.getDetails(inputAddress)
        
        const zipped = zip([volunteers, convertedToLandmark])
 
-       const inputLandmark: any = await this.locationIqService.getDetails(inputAddress)
+       const haversines = zipped.map((volunteer, landmark)=> {
+                          return { volunteer, distance: haversine({
+                                             lat: inputLandmark.lat, 
+                                             lon: inputLandmark.lon}, {
+                                             lat: landmark[0], 
+                                             lon: landmark[1]})}})
 
-       return zipped.map((volunteer, landmark)=> {
-                return {volunteer,
-                        distance: haversine(inputLandmark.lat, 
-                                            inputLandmark.lon, 
-                                            landmark[0], 
-                                            landmark[1])}
-                })
+        return haversines.reduce((prev, curr) =>
+            prev.distance < curr.distance ? prev : curr
+        )
+                                            
+                
     }   
 }

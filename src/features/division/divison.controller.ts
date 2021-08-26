@@ -4,7 +4,7 @@ import { Distribution } from '../distribution/distribution.schema';
 import { LocationIqDto } from '../locationIq/locationIq.dto';
 import { DivisonService } from './divison.service';
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('api/divison')
 export class DivisonController{
     

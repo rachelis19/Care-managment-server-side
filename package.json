@@ -30,6 +30,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "haversine": "^1.1.1",
     "mongoose": "^5.13.5",
     "node-kmeans": "^1.1.9",
     "passport": "^0.4.1",
