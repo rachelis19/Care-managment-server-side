@@ -3,6 +3,8 @@ import { AppModule } from './app.module'
 import { Logger, ValidationError, ValidationPipe } from '@nestjs/common'
 import { HttpExceptionFilter } from './core/httpFilters/http-exception.filter'
 import { ValidationException } from './core/exceptions/validation-exception'
+import { JwtAuthGuard } from './features/auth/guards/jwt.guard'
+import { AuthGuard } from '@nestjs/passport'
 
 async function bootstrap() {
 
@@ -11,6 +13,8 @@ async function bootstrap() {
   const logger = new Logger('bootstrap')
 
   app.useGlobalFilters(new HttpExceptionFilter())
+  
+  app.useGlobalGuards(new (AuthGuard('jwt')))
 
   app.useGlobalPipes(new ValidationPipe({
     exceptionFactory: (validationError: ValidationError[] = [])=>{  

@@ -2,9 +2,10 @@ import { Injectable, Logger } from '@nestjs/common'
 import { Distribution } from '../distribution/distribution.schema'
 import { LocationIqService } from '../locationIq/locationIq.service'
 import { UserService } from '../user/user.service'
-import  { haversine } from 'haversine'
 import { LocationIqDto } from '../locationIq/locationIq.dto'
-import { UserType } from 'src/core/config/enums'
+import { UserType } from '../../core/config/enums'
+import { haversine } from 'haversine'
+import { zip } from '../../core/utilities/zip.handler'
 
 const kmeans = require('node-kmeans')
 
@@ -29,25 +30,39 @@ export class DivisonService{
 
         const landmarkVec = await this.convertAddressToLandmark(addresses)
      
-        const clusters = await this.createKClusters(k, landmarkVec)
+        const groups = await this.createKClusters(k, landmarkVec)
         
-        return clusters
+        const zipped = groups.map(group=> zip([group.cluster, group.clusterInd]))
 
+        return zipped.map(zippedGroup=> zippedGroup.map(cluster=> { 
+            return {lon: cluster[0][0], 
+                    lat: cluster[0][1],
+                    address: addresses[cluster[1]]}
+            })
+        )
     }
 
-    protected async createKClusters(k: number, locations: number[][]){
+    protected async createKClusters(k: number, locations: number[][]): Promise<any>{
+        
+        console.log(location);
+        
         const response = kmeans.clusterize(locations, {k}, (err,res) => {
             if (err) console.error(err)
             return res
           })
         
-        return response
+        console.log(response);
+        
+        return response.groups.map(group=> {
+            return {cluster: group.cluster,
+                    clusterInd: group.clusterInd}
+        })
     }
 
     protected async convertAddressToLandmark(addresses: LocationIqDto[]){
         const promises = await addresses.map(address=> {
             return this.addressService.getDetails(address)
-        })
+        })     
 
         const resolvedAddress = await Promise.all(promises)
         
@@ -55,7 +70,9 @@ export class DivisonService{
     }
 
 
-    protected async findClosestVolunteer(inputAddress: LocationIqDto){     
+    public async findClosestVolunteer(inputAddress: LocationIqDto){       
+       this.logger.log('Recivied request finding closest volunteer')
+
        const volunteers = await this.userService.findAll({userType: UserType.Volunteer})
              
        const addresses = volunteers.map(volunteer => volunteer.address) 

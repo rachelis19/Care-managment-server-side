@@ -1,3 +1,5 @@
 export default {
-    LOCATION: 'pk.39bb04edc0fc0159c614676fe357bbad'
+    location: 'pk.39bb04edc0fc0159c614676fe357bbad',
+    jwtSecret: '727740170A309F2F6ECE8CFDD604470F8572E9EF97E8D6B6F09452BA1EE8A02F'
+    
 }

@@ -29,7 +29,7 @@ export class DistributionService{
                                                 
       const createdDistribution = new this.distributionModel(distribution)
       
-      this.logger.log(`Creating distribution with ${createdDistribution.id} id`)
+      this.logger.log(`Creating distribution with ${createdDistribution._id} id`)
 
       return await createdDistribution.save()
     }
@@ -43,13 +43,13 @@ export class DistributionService{
     public async find(id: string): Promise<Distribution>{
        this.logger.log(`Received find distribution request with ${id}`) 
 
-        return await this.distributionModel.findOne({id: id})
+        return await this.distributionModel.findOne({_id: id})
     }
 
-    public async update(distribution: Distribution){
-      this.logger.log(`Received update distribution request with ${distribution.id}`) 
+    public async update(id: string, distribution: Distribution){
+      this.logger.log(`Received update distribution request with ${id} id`) 
 
-      await this.distributionModel.updateOne(distribution)
+      return await this.distributionModel.findByIdAndUpdate(id, distribution)
 
     }
 

@@ -9,7 +9,7 @@ export type DistributionDocument = Distribution & Document
 export class Distribution{
     
     @Prop({default: uuid()})
-    id: string
+    _id: string
 
     @Prop({required: true})
     volunteerEmail: string

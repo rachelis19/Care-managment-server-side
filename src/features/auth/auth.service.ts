@@ -1,21 +1,37 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { UserType } from 'src/core/config/enums';
 import { UserService } from '../user/user.service'
-import { JwtService } from '@nestjs/jwt'
-import { UserType } from 'src/core/config/enums'
-
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UserService, 
+
+  logger = new Logger(AuthService.name)
+
+  constructor(private usersService: UserService,
               private jwtService: JwtService) {}
 
-  public async validateUser(username: string, type: UserType, password: string): Promise<any> {
-    const user = await this.userService.find(username, type)
+  async validateUser(email: string, password: string): Promise<any> {
+    this.logger.log(`Recivied request authentication with ${email} email`)
 
+    const user = await this.usersService.find(email)
+  
     if (user && user.password === password) {
       const { password, ...result } = user
       return result
     }
     return null
   }
+
+  async login(user: any) {
+    this.logger.log('User is successfully authenticated')
+
+    const payload = { username: user.email, sub: user.password }  
+    return {
+      access_token: this.jwtService.sign(payload),
+    }
+
+  }
 }
+
+  

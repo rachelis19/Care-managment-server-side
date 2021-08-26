@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
 import { DistributionDto } from './distribution.dto'
 import { Distribution } from './distribution.schema'
 import { DistributionService } from './distribution.service'
@@ -22,8 +22,8 @@ export class DistributionController{
         return await this.distributionService.find(id)
     }
 
-    @Put()
-    public async update(@Body() distribution){
-        return await this.distributionService.update(distribution)
+    @Put('id/:id')
+    public async update(@Param('id') id: string, @Body() distribution){
+        return await this.distributionService.update(id, distribution)
     }
 }

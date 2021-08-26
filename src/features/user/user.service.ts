@@ -14,13 +14,13 @@ export class UserService{
     
     public async create(user: UserDto): Promise<User> {
       this.logger.log('Received create user request')
-          
+         
       const createdUser = new this.userModel(user)
 
       return await createdUser.save()
     }
 
-    public async find(userEmail: string, type: UserType): Promise<User> {
+    public async find(userEmail: string, type: UserType = UserType.Admin): Promise<User> {
       this.logger.log(`Received find ${type} request with ${userEmail} email`)
 
       return await this.userModel.findOne({email: userEmail, userType: type})

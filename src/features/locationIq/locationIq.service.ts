@@ -15,11 +15,11 @@ export class LocationIqService{
                               address.numOfBuilding.toString()].join(',')
         
         const {data} = await this.http.get('/search.php', {
-                                            params: {key: Keys.LOCATION,
+                                            params: {key: Keys.location,
                                                         q: addressToStr,
                                                         format: 'json'}})
         
-        return data[0]
+        return data[0]?? {}
                                                                                                                     
     }
     
