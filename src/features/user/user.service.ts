@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { UserDto } from './user.dto'
 import { Model } from 'mongoose'
 import { UserType } from 'src/core/config/enums'
-
+import * as  bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService{
@@ -14,10 +14,15 @@ export class UserService{
     
     public async create(user: UserDto): Promise<User> {
       this.logger.log('Received create user request')
-         
+    
       const createdUser = new this.userModel(user)
+    
+      const saltOrRounds = 10
+      const hashedPassword = await bcrypt.hash(createdUser.password, saltOrRounds)   
+      createdUser.password = hashedPassword
 
       return await createdUser.save()
+      
     }
 
     public async find(userEmail: string, type: UserType = UserType.Admin): Promise<User> {

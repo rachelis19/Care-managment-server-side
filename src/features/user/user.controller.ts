@@ -9,7 +9,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 export class UserController{
     constructor(private userService: UserService){}
 
-    @Post()
+    @Post('/register')
     public async create(@Body() user: UserDto): Promise<User>{   
         return await this.userService.create(user)
     }
@@ -32,7 +32,7 @@ export class UserController{
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('/volunteer/email/:email')// added
+    @Get('/volunteer/email/:email')
     public async findVolunteer(@Param('email') email: string): Promise<User>{
         return await this.userService.find(email, UserType.Volunteer)
     }

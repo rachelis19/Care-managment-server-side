@@ -3,7 +3,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { Distribution } from '../distribution/distribution.schema';
 import { DivisonService } from './divison.service';
 
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 @Controller('api/divison')
 export class DivisonController{
     
