@@ -13,8 +13,6 @@ async function bootstrap() {
   const logger = new Logger('bootstrap')
 
   app.useGlobalFilters(new HttpExceptionFilter())
-  
-  app.useGlobalGuards(new (AuthGuard('jwt')))
 
   app.useGlobalPipes(new ValidationPipe({
     exceptionFactory: (validationError: ValidationError[] = [])=>{  

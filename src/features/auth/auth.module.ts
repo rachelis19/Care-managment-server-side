@@ -10,6 +10,7 @@ import { AuthService } from './auth.service'
 import keys from '../../core/config/keys'
 import { JwtStrategy } from './auth-jwt.strategy'
 
+@Global()
 @Module({
   imports: [
     UserModule,

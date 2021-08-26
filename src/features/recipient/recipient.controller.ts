@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Inject, Param, Post, UseGuards } from '@nestjs/common'
 import { RecipientService } from './recipient.service'
 import { RecipientDto } from './recipient.dto'
 import { Recipient } from './recipient.schema'
+import { JwtAuthGuard } from '../auth/guards/jwt.guard'
 
+@UseGuards(JwtAuthGuard)
 @Controller('api/recipient')
 export class RecipientController{
     constructor(private recipientService: RecipientService){}
