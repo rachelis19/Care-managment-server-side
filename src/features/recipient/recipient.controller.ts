@@ -2,7 +2,7 @@ import { Body, Controller, Get, Inject, Param, Post, UseGuards } from '@nestjs/c
 import { RecipientService } from './recipient.service'
 import { RecipientDto } from './recipient.dto'
 import { Recipient } from './recipient.schema'
-import { JwtAuthGuard } from '../auth/guards/jwt.guard'
+import { JwtAuthGuard } from '../auth/gurades/jwt.guard'
 
 @UseGuards(JwtAuthGuard)
 @Controller('api/recipient')

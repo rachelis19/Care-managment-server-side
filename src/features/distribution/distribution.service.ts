@@ -23,8 +23,8 @@ export class DistributionService{
     public async create(distribution: DistributionDto): Promise<Distribution>{
       this.logger.log('Received create distribution request with')
       
-      await this.validateEmail(distribution.adminEmail, UserType.Admin)
-      await this.validateEmail(distribution.volunteerEmail, UserType.Volunteer)
+      await this.validateEmail(distribution.adminEmail, true)
+      await this.validateEmail(distribution.volunteerEmail, true)
       await this.validateEmail(distribution.recipientEmail)
                                                 
       const createdDistribution = new this.distributionModel(distribution)
@@ -53,13 +53,13 @@ export class DistributionService{
 
     }
 
-    protected async validateEmail(email: string, userType?: UserType){
-     const response = userType? await this.userService.find(email, userType): 
-                                await this.recipientService.find(email)
+    protected async validateEmail(email: string, isUser: boolean = false){
+     const response = isUser? await this.userService.find(email): 
+                              await this.recipientService.find(email)
       
       if(!response){
 
-        const message = `There is no such ${email} email for ${userType?? 'recipient'} in the system`
+        const message = `There is no such ${email} email in the system`
         throw new ValidationException(message)
       }
     }

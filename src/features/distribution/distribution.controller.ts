@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common'
-import { JwtAuthGuard } from '../auth/guards/jwt.guard'
+import { JwtAuthGuard } from '../auth/gurades/jwt.guard'
 import { DistributionDto } from './distribution.dto'
 import { Distribution } from './distribution.schema'
 import { DistributionService } from './distribution.service'

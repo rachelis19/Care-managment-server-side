@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { UserDto } from './user.dto'
 import { User } from './user.schema'
 import { UserType } from 'src/core/config/enums'
-import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../auth/gurades/jwt.guard';
 
 @Controller('api/user')
 export class UserController{
@@ -26,14 +26,9 @@ export class UserController{
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('/admin/email/:email')
+    @Get('/email/:email')
     public async findAdmin(@Param('email') email: string): Promise<User> {
-        return await this.userService.find(email, UserType.Admin)
+        return await this.userService.find(email)
     }
 
-    @UseGuards(JwtAuthGuard)
-    @Get('/volunteer/email/:email')
-    public async findVolunteer(@Param('email') email: string): Promise<User>{
-        return await this.userService.find(email, UserType.Volunteer)
-    }
 }

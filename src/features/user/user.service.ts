@@ -25,10 +25,10 @@ export class UserService{
       
     }
 
-    public async find(userEmail: string, type: UserType = UserType.Admin): Promise<User> {
-      this.logger.log(`Received find ${type} request with ${userEmail} email`)
+    public async find(userEmail: string): Promise<User> {
+      this.logger.log(`Received find request with ${userEmail} email`)
 
-      return await this.userModel.findOne({email: userEmail, userType: type})
+      return await this.userModel.findOne({email: userEmail})
     }
 
     public async findAll(options): Promise<User[]>{
