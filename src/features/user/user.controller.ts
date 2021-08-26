@@ -30,9 +30,9 @@ export class UserController{
     public async findAdmin(@Param('email') email: string): Promise<User> {
         return await this.userService.find(email, UserType.Admin)
     }
-    
+
     @UseGuards(JwtAuthGuard)
-    @Get('/volunteer/email/:email')
+    @Get('/volunteer/email/:email')// added
     public async findVolunteer(@Param('email') email: string): Promise<User>{
         return await this.userService.find(email, UserType.Volunteer)
     }
