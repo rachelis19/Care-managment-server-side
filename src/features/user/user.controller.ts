@@ -31,4 +31,11 @@ export class UserController{
         return await this.userService.find(email)
     }
 
+    @Get('exists/email/:email')
+    public async exists(@Param('email') email: string): Promise<Boolean> {
+        return await this.userService.find(email) ? true: false
+    }
+
+
+
 }
