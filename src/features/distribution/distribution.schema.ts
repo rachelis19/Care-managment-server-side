@@ -20,9 +20,6 @@ export class Distribution{
     volunteerEmail: string
 
     @Prop({required: true})
-    recipientEmail: string
-     
-    @Prop({required: true})
     adminEmail: string
 
     @Prop({default: false})
@@ -34,16 +31,6 @@ export class Distribution{
 
     @Prop()
     date: string
-
-    @Prop({type: Object, required: true })
-    address: {
-        city: string,
-        street: string,
-        numOfBuilding: number,
-        lat: number,
-        lon: number
-    }
-
 
 }
 

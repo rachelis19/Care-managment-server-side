@@ -9,15 +9,9 @@ export class DistributionDto{
 
     @IsNotEmpty()
     volunteerEmail: string
-
-    @IsNotEmpty()
-    recipientEmail: string
      
     @IsNotEmpty()
     adminEmail: string
-
-    @IsNotEmpty()
-    recipientPhone: string
 
     @IsNotEmpty()
     packages: Package[]

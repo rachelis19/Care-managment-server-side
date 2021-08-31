@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { response } from 'express'
 import { Model } from 'mongoose'
 import { UserType } from 'src/core/config/enums'
 import { ValidationException } from 'src/core/exceptions/validation-exception'
@@ -25,7 +24,7 @@ export class DistributionService{
       
       await this.validateEmail(distribution.adminEmail, true)
       await this.validateEmail(distribution.volunteerEmail, true)
-      await this.validateEmail(distribution.recipientEmail)
+     
                                                 
       const createdDistribution = new this.distributionModel(distribution)
       

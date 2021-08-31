@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '../auth/gurades/jwt.guard';
 import { Distribution } from '../distribution/distribution.schema';
 import { LocationIqDto } from '../locationIq/locationIq.dto';
@@ -16,8 +16,8 @@ export class DivisonController{
       return await this.divisonService.distributions(divisonRequest)
     }
     
-    @Post('volunteer')
-    public async find(@Body() address: any){
-       return await this.divisonService.findClosestVolunteer(address)
+    @Get('volunteer/:email')
+    public async find(@Param('email') email: string){
+       return await this.divisonService.findClosestVolunteer(email)
     }
 }
