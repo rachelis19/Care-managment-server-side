@@ -22,7 +22,9 @@ export class Recipient{
     address: {
         city: string,
         street: string,
-        numOfBuilding: number
+        numOfBuilding: number,
+        lat: number,
+        lon: number
     }
 }
 

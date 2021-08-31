@@ -26,6 +26,10 @@ export class RecipientService{
       return await this.recipientModel.findOne({email: recipientEmail})
     }
 
+    public async findRecipientAddress(email: string){
+      return await (await this.find(email)).address
+    }
+  
     public async findAll(): Promise<Recipient[]>{
         this.logger.log('Received find all recipients request')
 

@@ -26,7 +26,9 @@ export class UserDto {
     address: {
         city: string,
         street: string,
-        numOfBuilding: number
+        numOfBuilding: number,
+        lot: number,
+        lan: number
     }
 
 }

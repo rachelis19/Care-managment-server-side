@@ -26,7 +26,9 @@ export class User{
     address: {
         city: string,
         street: string,
-        numOfBuilding: number
+        numOfBuilding: number,
+        lon: number,
+        lat: number
     }
 
     @Prop({type: UserType})

@@ -9,7 +9,7 @@ import { DistributionService } from './distribution.service'
 export class DistributionController{
     constructor(private distributionService: DistributionService){}
 
-    @Post()
+    @Post('save')
     public async create(@Body() distribution: DistributionDto): Promise<Distribution>{   
         return await this.distributionService.create(distribution)
     }

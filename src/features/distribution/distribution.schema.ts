@@ -5,6 +5,11 @@ import { v4 as uuid } from 'uuid'
 
 export type DistributionDocument = Distribution & Document
 
+export class Package{
+    content: PkgType
+    recipientEmail: string
+}
+
 @Schema()
 export class Distribution{
     
@@ -20,25 +25,23 @@ export class Distribution{
     @Prop({required: true})
     adminEmail: string
 
-    @Prop({required: true})
-    recipientPhone: string
-
     @Prop({default: false})
     isDelivered: boolean
 
-    @Prop({type: [String], 
-           enum: Object.values(PkgType), 
-          required: true})         
-    package
+    @Prop({type: [{content: {type:PkgType}, recipientEmail: {type:String}}], 
+                  required: true})         
+    packages: {content: PkgType, recipientEmail: String}[]
 
-    @Prop({default: new Date().toLocaleString()})
+    @Prop()
     date: string
 
     @Prop({type: Object, required: true })
     address: {
         city: string,
         street: string,
-        numOfBuilding: number
+        numOfBuilding: number,
+        lat: number,
+        lon: number
     }
 
 

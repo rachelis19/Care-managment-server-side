@@ -19,6 +19,11 @@ export class RecipientController{
         return this.recipientService.findAll()
     }
 
+    // @Get('city/:city')
+    // public async findByCity(@Param('city') city: string){
+    //     return this.recipientService.findAll()
+    // }
+
     @Get('/email/:email')
     public async find(@Param('email') email: string){
         return this.recipientService.find(email)

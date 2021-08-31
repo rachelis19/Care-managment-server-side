@@ -9,6 +9,7 @@ import { RecipientService } from './recipient.service'
     imports: [MongooseModule.forFeature([{name: Recipient.name, schema: RecipientSchema}])],
     controllers: [RecipientController],
     providers: [RecipientService],
-    exports: [RecipientService]
+    exports: [RecipientService, 
+        MongooseModule.forFeature([{name: Recipient.name, schema: RecipientSchema}])]
 })
 export class RecipientModule{}

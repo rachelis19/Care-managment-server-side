@@ -1,5 +1,6 @@
 import { IsEnum, IsNotEmpty } from "class-validator"
 import { PkgType } from "src/core/config/enums"
+import { Package } from "./distribution.schema"
 
 export class DistributionDto{
 
@@ -19,8 +20,7 @@ export class DistributionDto{
     recipientPhone: string
 
     @IsNotEmpty()
-    @IsEnum(PkgType, {each: true})
-    package: PkgType[]
+    packages: Package[]
 
     @IsNotEmpty()
     address: {
