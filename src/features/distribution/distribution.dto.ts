@@ -16,11 +16,4 @@ export class DistributionDto{
     @IsNotEmpty()
     packages: Package[]
 
-    @IsNotEmpty()
-    address: {
-        city: string,
-        street: string,
-        numOfBuilding: number
-    }
-
 }

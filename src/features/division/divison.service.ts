@@ -70,9 +70,9 @@ export class DivisonService{
                                              address.lat, 
                                              address.lon, element[1].lat, element[1].lon)}})       
         
-        return haversines.reduce((prev, curr) =>
-            prev.distance < curr.distance ? prev.volunteer.email : curr.volunteer.email
-        )
+        haversines.sort((a, b) =>  a.distance - b.distance)     
+        return haversines[0].volunteer.email
+         
     } 
     
     
