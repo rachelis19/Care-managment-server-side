@@ -39,14 +39,18 @@ export class DivisonService{
         
         const groups = await this.createKClusters(k, landmarkVec)
      
-        const packages = groups.map(element=> element.clusterInd.map(index=>
-            {return divisonRequest.packages.filter(pack=> pack.recipientEmail === resolved[index].email)[0]}))
-        
+        const packages = groups.map(element=> 
+            { return  { centroId: element.centroId,
+                        pacages:element.clusterInd.map(index=>
+                    {return divisonRequest.packages.filter(pack=> pack.recipientEmail === resolved[index].email)[0]}) }
+           })
+           
         const distributions = packages.map(pack=> {return  {
             adminEmail: divisonRequest.adminEmail,
             date : divisonRequest.date,
             isDelivered: false,
-            packages: pack
+            packages: pack.pacages,
+            centroId: pack.centroId
         }})
 
        return distributions
@@ -86,6 +90,7 @@ export class DivisonService{
         
         return response.groups.map(group=> {
             return {cluster: group.cluster,
+                    centroId: group.centroid,
                     clusterInd: group.clusterInd}
         })
     }
