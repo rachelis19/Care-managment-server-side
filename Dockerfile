@@ -12,5 +12,5 @@ COPY . .
 RUN npm run build
 RUN npm rebuild bcrypt --build-from-source
 
-EXPOSE 6001
+EXPOSE 8082
 CMD [ "node", "dist/src/main"]

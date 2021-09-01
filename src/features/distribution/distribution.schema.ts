@@ -8,6 +8,7 @@ export type DistributionDocument = Distribution & Document
 export class Package{
     content: PkgType
     recipientEmail: string
+    address: Object
 }
 
 @Schema()
@@ -22,9 +23,9 @@ export class Distribution{
     @Prop({default: false})
     isDelivered: boolean
 
-    @Prop({type: [{content: {type:PkgType}, recipientEmail: {type:String}}], 
+    @Prop({type: [{content: {type:PkgType}, recipientEmail: {type:String}, address: {type:Object}}], 
                   required: true})         
-    packages: {content: PkgType, recipientEmail: String}[]
+    packages: {content: PkgType, recipientEmail: String, address: Object}[]
 
     @Prop()
     date: string

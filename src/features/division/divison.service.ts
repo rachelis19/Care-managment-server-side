@@ -16,8 +16,7 @@ export class DivisonService{
 
     logger = new Logger(DivisonService.name)
 
-    constructor(private locationIqService: LocationIqService,
-                private userService: UserService,
+    constructor(private userService: UserService,
                 private recipientService: RecipientService){}
  
     public async distributions(divisonRequest: DivisonDto){
@@ -34,8 +33,8 @@ export class DivisonService{
         
         const resolved = await Promise.all(promises)
         
-        const landmarkVec = resolved.map(volunteer=> 
-            {return [volunteer.address.lat, volunteer.address.lon]})
+        const landmarkVec = resolved.map(recipient=> 
+            {return [recipient.address.lat, recipient.address.lon]})
         
         const groups = await this.createKClusters(k, landmarkVec)
      

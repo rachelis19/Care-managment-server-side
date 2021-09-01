@@ -9,9 +9,9 @@ import { DistributionService } from './distribution.service'
 
 
 @Module({
-   imports:     [MongooseModule.forFeature([{name: Distribution.name, schema: DistributionSchema}]),
-                 UserModule,
-                 RecipientModule],
+   imports:   [MongooseModule.forFeature([{name: Distribution.name, schema: DistributionSchema}]),
+               UserModule,
+               RecipientModule],
                  
    controllers: [DistributionController],
    providers:   [DistributionService]
