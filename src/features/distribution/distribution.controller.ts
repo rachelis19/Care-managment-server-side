@@ -4,7 +4,7 @@ import { DistributionDto } from './distribution.dto'
 import { Distribution } from './distribution.schema'
 import { DistributionService } from './distribution.service'
 
-@UseGuards(JwtAuthGuard)
+//@UseGuards(JwtAuthGuard)
 @Controller('api/distribution')
 export class DistributionController{
     constructor(private distributionService: DistributionService){}

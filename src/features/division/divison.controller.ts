@@ -5,7 +5,7 @@ import { LocationIqDto } from '../locationIq/locationIq.dto';
 import { DivisonDto } from './divison.dto';
 import { DivisonService } from './divison.service';
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('api/divison')
 export class DivisonController{
     

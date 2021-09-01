@@ -13,9 +13,6 @@ export class Package{
 @Schema()
 export class Distribution{
     
-    @Prop({default: uuid()})
-    _id: string
-
     @Prop({required: true})
     volunteerEmail: string
 
