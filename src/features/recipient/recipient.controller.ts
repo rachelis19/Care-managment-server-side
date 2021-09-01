@@ -19,10 +19,10 @@ export class RecipientController{
         return this.recipientService.findAll()
     }
 
-    // @Get('city/:city')
-    // public async findByCity(@Param('city') city: string){
-    //     return this.recipientService.findAll()
-    // }
+    @Get('exists/email/:email')
+    public async exists(@Param('email') email: string): Promise<Boolean> {
+        return await this.recipientService.find(email) ? true: false
+    }
 
     @Get('/email/:email')
     public async find(@Param('email') email: string){
