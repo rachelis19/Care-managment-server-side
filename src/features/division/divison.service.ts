@@ -25,7 +25,7 @@ export class DivisonService{
 
         const numOfVolunteers = await this.userService.numOfUsers(UserType.Volunteer)
 
-        const k = Math.ceil(divisonRequest.packages.length / numOfVolunteers)
+        const k = numOfVolunteers 
 
         this.logger.log(`Creating ${k} clusters`)
 
