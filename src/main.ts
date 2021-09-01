@@ -15,7 +15,7 @@ async function bootstrap() {
   
   globals(app)
 
-  await app.listen(8082)
+  await app.listen(process.env.port || 8082)
   
   logger.log('App context is ready')
 
