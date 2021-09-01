@@ -8,6 +8,7 @@ import { RecipientModule } from './features/recipient/recipient.module'
 import { UserModule } from './features/user/user.module'
 import { AuthModule } from './features/auth/auth.module'
 import { ChatModule } from './features/chat/chat.module'
+import { BlogModule } from './features/blog/blog.module'
 
 const mongooseConnection = 'mongodb+srv://racheliShen:0545581921@cluster0.4jla2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
@@ -15,6 +16,7 @@ const mongooseConnection = 'mongodb+srv://racheliShen:0545581921@cluster0.4jla2.
   imports: [MongooseModule.forRoot(mongooseConnection, { useFindAndModify: false }),
             DistributionModule,
             ChatModule,
+            BlogModule,
             RecipientModule,
             DivisonModule,  
             LocationIqModule,
