@@ -1,7 +1,7 @@
 FROM node:12
 
 
-WORKDIR /thomas/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 
 RUN npm run build
+RUN npm rebuild bcrypt --build-from-source
 
-EXPOSE 8080
-CMD [ "node", "dist/main" ]
-
+EXPOSE 6001
+CMD [ "node", "dist/src/main"]
