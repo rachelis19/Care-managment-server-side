@@ -15,7 +15,7 @@ async function bootstrap() {
   
   globals(app)
 
-  await app.listen(3000)
+  await app.listen(8082)
   
   logger.log('App context is ready')
 

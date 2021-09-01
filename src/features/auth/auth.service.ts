@@ -1,6 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { UserType } from 'src/core/config/enums';
+import { Injectable, Logger } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { UserService } from '../user/user.service'
 import * as  bcrypt from 'bcrypt'
 
