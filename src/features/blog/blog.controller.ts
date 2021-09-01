@@ -4,7 +4,7 @@ import { JwtAuthGuard } from "../auth/gurades/jwt.guard";
 import { BlogDto } from "./blog.dto";
 import { BlogService } from "./blog.service";
 
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('api/blog')
 export class BlogController{
 
