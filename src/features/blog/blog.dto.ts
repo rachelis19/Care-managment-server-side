@@ -12,4 +12,7 @@ export class BlogDto{
     @IsNotEmpty()
     body: string
 
+    @IsNotEmpty()
+    date: string
+
 }

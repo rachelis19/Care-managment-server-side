@@ -12,6 +12,11 @@ export class Blog{
     
     @Prop({required: true})
     adminEmail: string
+    
+    @Prop({required: true})
+    date: string
+
+
 
 }
 
