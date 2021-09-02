@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
-import { ChatGateway } from './chat.gateway'
+import { ChatGateway } from './features/chat/chat.gateway'
 import { LocationIqModule } from './features/locationIq/locationIq.module'
 import { DistributionModule } from './features/distribution/distribution.module'
 import { DivisonModule } from './features/division/divison.module'
