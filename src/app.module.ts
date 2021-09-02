@@ -15,15 +15,13 @@ const mongooseConnection = 'mongodb+srv://racheliShen:0545581921@cluster0.4jla2.
 @Module({
   imports: [MongooseModule.forRoot(mongooseConnection, { useFindAndModify: false }),
             DistributionModule,
-            ChatModule,
             BlogModule,
             RecipientModule,
             DivisonModule,  
             LocationIqModule,
             UserModule,
             AuthModule],
-            
-  providers: [ChatGateway]
+
 })
 
 export class AppModule {}
