@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { Logger } from '@nestjs/common'
 import globals from 'globals'
-import {mySocket} from './socket.chat'
+
 
 
 
@@ -12,9 +12,7 @@ async function bootstrap() {
 
   const logger = new Logger('bootstrap')
  
-  mySocket(app)
-  
-  app.enableCors()
+  app.enableCors() 
   
   globals(app)
 

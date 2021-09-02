@@ -4,7 +4,10 @@ const SocketIO = require('socket.io')
 
 export const mySocket =  (app)=>{
     
+ 
+    
     const io = SocketIO(app)
+
     io.on('connection', socket => {
   
 
